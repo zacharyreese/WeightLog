@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -70,6 +71,32 @@ namespace WeightLog
                 facePicDir.Text = file;
             }
             Console.WriteLine(result); // <-- For debugging use.
+        }
+
+        public void dbQuery(string text)
+        {
+            MySqlConnection connection = new MySqlConnection("server = localhost;user id = root;persistsecurityinfo = True;database = workoutlog;password=password");
+            MySqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "SELECT * FROM tracker";
+
+            try {
+                connection.Open();
+                Console.WriteLine("Connection successful");
+            }
+            catch (Exception erro) {
+                MessageBox.Show("Erro" + erro);
+                this.Close();
+            }
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read()) {
+                Console.WriteLine(reader.GetString("weight"));
+            }
+            connection.Close();
+        }
+
+        private void logBtn_Click(object sender, EventArgs e)
+        {
+            dbQuery("44");
         }
     }
 }

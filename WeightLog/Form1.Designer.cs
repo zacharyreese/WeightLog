@@ -206,6 +206,7 @@
             this.logBtn.TabIndex = 16;
             this.logBtn.Text = "Log";
             this.logBtn.UseVisualStyleBackColor = true;
+            this.logBtn.Click += new System.EventHandler(this.logBtn_Click);
             // 
             // titleLbl
             // 
