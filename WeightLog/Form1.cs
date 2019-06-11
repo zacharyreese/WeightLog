@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -115,13 +116,40 @@ namespace WeightLog
             string dateFolder = System.IO.Path.Combine(folderName, date); //Set subdirectory
             System.IO.Directory.CreateDirectory(dateFolder); //Create new folder if it doesn't already exist
 
-            //Get values from text boxes
-            double weight = Double.Parse(weightTxtBox.Text);
-            string front = frontPicDir.Text;
-            string side = sidePicDir.Text;
-            string back = backPicDir.Text;
-            string face = facePicDir.Text;
-            string log = thoughtTxt.Text;
+            //Get pic directories to move pics to newly created directory
+            //MoveTo() does not support overwriting so above directory must be empty before operation
+            //Front pic
+            try {
+                FileInfo front = new FileInfo(frontPicDir.Text); //Set chosen pic as a file and move to new dir
+                string newFrontPath = Path.Combine(dateFolder, "front.jpg"); //Create new path in date subfolder and rename pic
+                front.MoveTo(newFrontPath); //Move pic to above date subfolder
+            } catch (Exception ex) {
+                Console.WriteLine("Could not find front pic");
+            }
+            //Side pic
+            try {
+                FileInfo side = new FileInfo(sidePicDir.Text);
+                string newSidePath = Path.Combine(dateFolder, "side.jpg");
+                side.MoveTo(newSidePath);
+            } catch (Exception ex) {
+                Console.WriteLine("Could not find side pic");
+            }
+            //Back pic
+            try {
+                FileInfo back = new FileInfo(backPicDir.Text);
+                string newBackPath = Path.Combine(dateFolder, "back.jpg");
+                back.MoveTo(newBackPath);
+            } catch (Exception ex) {
+                Console.WriteLine("Could not find back pic");
+            }
+            //Face pic
+            try {
+                FileInfo face = new FileInfo(facePicDir.Text);
+                string newFacePath = Path.Combine(dateFolder, "face.jpg");
+                face.MoveTo(newFacePath);
+            } catch (Exception ex) {
+                Console.WriteLine("Could not find face pic");
+            }
         }
     }
 }
