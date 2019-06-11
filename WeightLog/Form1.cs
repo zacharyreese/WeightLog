@@ -37,7 +37,6 @@ namespace WeightLog
                 Console.WriteLine(file);
                 frontPicDir.Text = file; //Insert pic directory into textbox
             }
-            //Console.WriteLine(result); // <-- For debugging use.
         }
 
         private void sidePicBtn_Click(object sender, EventArgs e)
@@ -49,7 +48,6 @@ namespace WeightLog
                 Console.WriteLine(file);
                 sidePicDir.Text = file;
             }
-            //Console.WriteLine(result); // <-- For debugging use.
         }
 
         private void backPicBtn_Click(object sender, EventArgs e)
@@ -61,7 +59,6 @@ namespace WeightLog
                 Console.WriteLine(file);
                 backPicDir.Text = file;
             }
-            //Console.WriteLine(result); // <-- For debugging use.
         }
 
         private void facePicBtn_Click(object sender, EventArgs e)
@@ -73,7 +70,6 @@ namespace WeightLog
                 Console.WriteLine(file);
                 facePicDir.Text = file;
             }
-            //Console.WriteLine(result); // <-- For debugging use.
         }
         //End buttons
 
@@ -106,6 +102,24 @@ namespace WeightLog
             }
         }
 
+        public void dbInsert(double weight, string frontpic, string sidepic, string backpic, string facepic, string log)
+        {
+            //Create MySQL connection
+            MySqlConnection connection = new MySqlConnection("server = localhost;user id = root;persistsecurityinfo = True;database = workoutlog;password=password");
+            MySqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "INSERT INTO tracker(weight, frontpic, sidepic, backpic, facepic, log) VALUES(" + weight + ", \"" + frontpic + "\", \"" + sidepic + "\", \"" + backpic + "\", \"" + facepic + "\", \"" + log + "\")";
+            Console.WriteLine(cmd.CommandText);
+
+            try {
+                connection.Open();
+                Console.WriteLine("Connection successful");
+                MySqlDataReader reader = cmd.ExecuteReader();
+                Console.WriteLine("Insert successful");
+            } catch(Exception ex) {
+                Console.WriteLine(ex);
+            }
+        }
+
         private void logBtn_Click(object sender, EventArgs e)
         {
             //Create folder of current date to hold progress pics for database
@@ -116,12 +130,21 @@ namespace WeightLog
             string dateFolder = System.IO.Path.Combine(folderName, date); //Set subdirectory
             System.IO.Directory.CreateDirectory(dateFolder); //Create new folder if it doesn't already exist
 
+            //Variables to work with
+            double weight = Double.Parse(weightTxtBox.Text); //Weight
+            string log = thoughtTxt.Text; //Log text
+            string newFrontPath = "";
+            string newSidePath = "";
+            string newBackPath = "";
+            string newFacePath = "";
+
+
             //Get pic directories to move pics to newly created directory
             //MoveTo() does not support overwriting so above directory must be empty before operation
             //Front pic
             try {
                 FileInfo front = new FileInfo(frontPicDir.Text); //Set chosen pic as a file and move to new dir
-                string newFrontPath = Path.Combine(dateFolder, "front.jpg"); //Create new path in date subfolder and rename pic
+                newFrontPath = Path.Combine(dateFolder, "front.jpg"); //Create new path in date subfolder and rename pic
                 front.MoveTo(newFrontPath); //Move pic to above date subfolder
             } catch (Exception ex) {
                 Console.WriteLine("Could not find front pic");
@@ -129,7 +152,7 @@ namespace WeightLog
             //Side pic
             try {
                 FileInfo side = new FileInfo(sidePicDir.Text);
-                string newSidePath = Path.Combine(dateFolder, "side.jpg");
+                newSidePath = Path.Combine(dateFolder, "side.jpg");
                 side.MoveTo(newSidePath);
             } catch (Exception ex) {
                 Console.WriteLine("Could not find side pic");
@@ -137,7 +160,7 @@ namespace WeightLog
             //Back pic
             try {
                 FileInfo back = new FileInfo(backPicDir.Text);
-                string newBackPath = Path.Combine(dateFolder, "back.jpg");
+                newBackPath = Path.Combine(dateFolder, "back.jpg");
                 back.MoveTo(newBackPath);
             } catch (Exception ex) {
                 Console.WriteLine("Could not find back pic");
@@ -145,11 +168,18 @@ namespace WeightLog
             //Face pic
             try {
                 FileInfo face = new FileInfo(facePicDir.Text);
-                string newFacePath = Path.Combine(dateFolder, "face.jpg");
+                newFacePath = Path.Combine(dateFolder, "face.jpg");
                 face.MoveTo(newFacePath);
             } catch (Exception ex) {
                 Console.WriteLine("Could not find face pic");
             }
+
+            //INSERT SQL statement
+            newFrontPath = newFrontPath.Replace(@"\", @"\\"); //Replace backslash with double backslash so that the backslash escapes in the insert
+            newSidePath = newSidePath.Replace(@"\", @"\\");
+            newBackPath = newBackPath.Replace(@"\", @"\\");
+            newFacePath = newFacePath.Replace(@"\", @"\\");
+            dbInsert(weight, newFrontPath, newSidePath, newBackPath, newFacePath, log); //Insert new row into DB
         }
     }
 }

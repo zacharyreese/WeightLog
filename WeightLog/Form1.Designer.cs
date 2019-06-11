@@ -52,7 +52,7 @@
             // 
             this.weightTxt.AutoSize = true;
             this.weightTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.weightTxt.Location = new System.Drawing.Point(82, 139);
+            this.weightTxt.Location = new System.Drawing.Point(82, 150);
             this.weightTxt.Name = "weightTxt";
             this.weightTxt.Size = new System.Drawing.Size(79, 25);
             this.weightTxt.TabIndex = 0;
@@ -61,7 +61,7 @@
             // 
             // weightTxtBox
             // 
-            this.weightTxtBox.Location = new System.Drawing.Point(195, 144);
+            this.weightTxtBox.Location = new System.Drawing.Point(195, 155);
             this.weightTxtBox.Name = "weightTxtBox";
             this.weightTxtBox.Size = new System.Drawing.Size(148, 20);
             this.weightTxtBox.TabIndex = 1;
@@ -90,7 +90,7 @@
             // 
             this.backPic.AutoSize = true;
             this.backPic.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.backPic.Location = new System.Drawing.Point(82, 304);
+            this.backPic.Location = new System.Drawing.Point(82, 303);
             this.backPic.Name = "backPic";
             this.backPic.Size = new System.Drawing.Size(96, 25);
             this.backPic.TabIndex = 4;
