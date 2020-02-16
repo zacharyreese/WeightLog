@@ -67,7 +67,6 @@
             this.weightTxt.Size = new System.Drawing.Size(79, 25);
             this.weightTxt.TabIndex = 0;
             this.weightTxt.Text = "Weight";
-            this.weightTxt.Click += new System.EventHandler(this.weightTxt_Click);
             // 
             // weightTxtBox
             // 
@@ -126,7 +125,6 @@
             this.frontPicDir.Name = "frontPicDir";
             this.frontPicDir.Size = new System.Drawing.Size(148, 20);
             this.frontPicDir.TabIndex = 6;
-            this.frontPicDir.TextChanged += new System.EventHandler(this.frontPicDir_TextChanged);
             // 
             // sidePicDir
             // 
@@ -238,7 +236,6 @@
             this.waistLbl.Size = new System.Drawing.Size(149, 25);
             this.waistLbl.TabIndex = 18;
             this.waistLbl.Text = "Waist (inches)";
-            this.waistLbl.Click += new System.EventHandler(this.label1_Click);
             // 
             // stomachLbl
             // 
@@ -350,7 +347,6 @@
             this.Controls.Add(this.weightTxt);
             this.Name = "Form1";
             this.Text = "Weight Log - Zac Reese";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -21,11 +21,6 @@ namespace WeightLog
             InitializeComponent();
         }
 
-        private void weightTxt_Click(object sender, EventArgs e)
-        {
-
-        }
-
         //Buttons
         private void frontPicBtn_Click(object sender, EventArgs e)
         {
@@ -76,7 +71,7 @@ namespace WeightLog
         public void dbQuery(string query)
         {
             //Create MySQL connection
-            MySqlConnection connection = new MySqlConnection("server = localhost;user id = root;persistsecurityinfo = True;database = workoutlog;password=password");
+            MySqlConnection connection = new MySqlConnection("server = localhost;user id = root;persistsecurityinfo = True;database = weight_log;password=password");
             MySqlCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT * FROM tracker";
 
@@ -102,12 +97,15 @@ namespace WeightLog
             }
         }
 
-        public void dbInsert(double weight, string frontpic, string sidepic, string backpic, string facepic, string log)
+        public void dbInsert(double weight, string frontpic, string sidepic, string backpic, string facepic, string log, double waist, double stomach, double biceps, double chest, double thigh)
         {
             //Create MySQL connection
-            MySqlConnection connection = new MySqlConnection("server = localhost;user id = root;persistsecurityinfo = True;database = workoutlog;password=password");
+            MySqlConnection connection = new MySqlConnection("server = localhost;user id = root;persistsecurityinfo = True;database = weight_log;password=password");
             MySqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "INSERT INTO tracker(weight, frontpic, sidepic, backpic, facepic, log) VALUES(" + weight + ", \"" + frontpic + "\", \"" + sidepic + "\", \"" + backpic + "\", \"" + facepic + "\", \"" + log + "\")";
+            //Insert statement with date insert auto generated using CURDATE (yyyy-mm-dd)
+            cmd.CommandText = "INSERT INTO tracker(date, weight, frontpic, sidepic, backpic, facepic, log, waistsize, stomachsize," +
+                " bicepsize, chestsize, thighsize) VALUES(CURDATE(), \"" + weight + "\", \"" + frontpic + "\", \"" + sidepic + "\", \"" + 
+                backpic + "\", \"" + facepic + "\", \"" + log + "\", \"" + waist + "\", \"" + stomach + "\", \"" + biceps + "\", \"" + chest + "\", \"" + thigh + "\")";
             Console.WriteLine(cmd.CommandText);
 
             try {
@@ -128,6 +126,12 @@ namespace WeightLog
             date = date.Replace("/", "."); //Change to (mm.dd.yy) for folder naming purposes
             Console.WriteLine(date);
             string dateFolder = System.IO.Path.Combine(folderName, date); //Set subdirectory
+
+            //Check to see if folder exists, if it does, delete and recreate
+            if(System.IO.Directory.Exists(dateFolder))
+            {
+                System.IO.Directory.Delete(dateFolder);
+            }
             System.IO.Directory.CreateDirectory(dateFolder); //Create new folder if it doesn't already exist
 
             //Variables to work with
@@ -137,6 +141,11 @@ namespace WeightLog
             string newSidePath = "";
             string newBackPath = "";
             string newFacePath = "";
+            double waist = Double.Parse(waistTxtBox.Text);
+            double stomach = Double.Parse(stomachTxtBox.Text);
+            double bicep = Double.Parse(bicepTxtBox.Text);
+            double chest = Double.Parse(chestTxtBox.Text);
+            double thigh = Double.Parse(thighTxtBox.Text);
 
 
             //Get pic directories to move pics to newly created directory
@@ -147,7 +156,7 @@ namespace WeightLog
                 newFrontPath = Path.Combine(dateFolder, "front.jpg"); //Create new path in date subfolder and rename pic
                 front.MoveTo(newFrontPath); //Move pic to above date subfolder
             } catch (Exception ex) {
-                Console.WriteLine("Could not find front pic");
+                Console.WriteLine("Could not find front pic " + ex);
             }
             //Side pic
             try {
@@ -155,7 +164,7 @@ namespace WeightLog
                 newSidePath = Path.Combine(dateFolder, "side.jpg");
                 side.MoveTo(newSidePath);
             } catch (Exception ex) {
-                Console.WriteLine("Could not find side pic");
+                Console.WriteLine("Could not find side pic " + ex);
             }
             //Back pic
             try {
@@ -163,7 +172,7 @@ namespace WeightLog
                 newBackPath = Path.Combine(dateFolder, "back.jpg");
                 back.MoveTo(newBackPath);
             } catch (Exception ex) {
-                Console.WriteLine("Could not find back pic");
+                Console.WriteLine("Could not find back pic " + ex);
             }
             //Face pic
             try {
@@ -171,7 +180,7 @@ namespace WeightLog
                 newFacePath = Path.Combine(dateFolder, "face.jpg");
                 face.MoveTo(newFacePath);
             } catch (Exception ex) {
-                Console.WriteLine("Could not find face pic");
+                Console.WriteLine("Could not find face pic " + ex);
             }
 
             //INSERT SQL statement
@@ -179,22 +188,9 @@ namespace WeightLog
             newSidePath = newSidePath.Replace(@"\", @"\\");
             newBackPath = newBackPath.Replace(@"\", @"\\");
             newFacePath = newFacePath.Replace(@"\", @"\\");
-            dbInsert(weight, newFrontPath, newSidePath, newBackPath, newFacePath, log); //Insert new row into DB
+            dbInsert(weight, newFrontPath, newSidePath, newBackPath, newFacePath, log, waist, stomach, bicep, chest, thigh); //Insert new row into DB
         }
 
-        private void frontPicDir_TextChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
