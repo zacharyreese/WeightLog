@@ -181,5 +181,20 @@ namespace WeightLog
             newFacePath = newFacePath.Replace(@"\", @"\\");
             dbInsert(weight, newFrontPath, newSidePath, newBackPath, newFacePath, log); //Insert new row into DB
         }
+
+        private void frontPicDir_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

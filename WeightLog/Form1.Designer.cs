@@ -46,6 +46,16 @@
             this.thoughtTxt = new System.Windows.Forms.TextBox();
             this.logBtn = new System.Windows.Forms.Button();
             this.titleLbl = new System.Windows.Forms.Label();
+            this.waistLbl = new System.Windows.Forms.Label();
+            this.stomachLbl = new System.Windows.Forms.Label();
+            this.bicepLbl = new System.Windows.Forms.Label();
+            this.chestLbl = new System.Windows.Forms.Label();
+            this.thighLbl = new System.Windows.Forms.Label();
+            this.waistTxtBox = new System.Windows.Forms.TextBox();
+            this.stomachTxtBox = new System.Windows.Forms.TextBox();
+            this.bicepTxtBox = new System.Windows.Forms.TextBox();
+            this.thighTxtBox = new System.Windows.Forms.TextBox();
+            this.chestTxtBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // weightTxt
@@ -116,6 +126,7 @@
             this.frontPicDir.Name = "frontPicDir";
             this.frontPicDir.Size = new System.Drawing.Size(148, 20);
             this.frontPicDir.TabIndex = 6;
+            this.frontPicDir.TextChanged += new System.EventHandler(this.frontPicDir_TextChanged);
             // 
             // sidePicDir
             // 
@@ -200,7 +211,7 @@
             // logBtn
             // 
             this.logBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.logBtn.Location = new System.Drawing.Point(339, 449);
+            this.logBtn.Location = new System.Drawing.Point(329, 727);
             this.logBtn.Name = "logBtn";
             this.logBtn.Size = new System.Drawing.Size(119, 54);
             this.logBtn.TabIndex = 16;
@@ -218,11 +229,107 @@
             this.titleLbl.TabIndex = 17;
             this.titleLbl.Text = "Weight Log";
             // 
+            // waistLbl
+            // 
+            this.waistLbl.AutoSize = true;
+            this.waistLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.waistLbl.Location = new System.Drawing.Point(82, 463);
+            this.waistLbl.Name = "waistLbl";
+            this.waistLbl.Size = new System.Drawing.Size(149, 25);
+            this.waistLbl.TabIndex = 18;
+            this.waistLbl.Text = "Waist (inches)";
+            this.waistLbl.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // stomachLbl
+            // 
+            this.stomachLbl.AutoSize = true;
+            this.stomachLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stomachLbl.Location = new System.Drawing.Point(429, 463);
+            this.stomachLbl.Name = "stomachLbl";
+            this.stomachLbl.Size = new System.Drawing.Size(179, 25);
+            this.stomachLbl.TabIndex = 19;
+            this.stomachLbl.Text = "Stomach (inches)";
+            // 
+            // bicepLbl
+            // 
+            this.bicepLbl.AutoSize = true;
+            this.bicepLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bicepLbl.Location = new System.Drawing.Point(82, 541);
+            this.bicepLbl.Name = "bicepLbl";
+            this.bicepLbl.Size = new System.Drawing.Size(160, 25);
+            this.bicepLbl.TabIndex = 20;
+            this.bicepLbl.Text = "Biceps (inches)";
+            // 
+            // chestLbl
+            // 
+            this.chestLbl.AutoSize = true;
+            this.chestLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chestLbl.Location = new System.Drawing.Point(429, 542);
+            this.chestLbl.Name = "chestLbl";
+            this.chestLbl.Size = new System.Drawing.Size(151, 25);
+            this.chestLbl.TabIndex = 21;
+            this.chestLbl.Text = "Chest (inches)";
+            // 
+            // thighLbl
+            // 
+            this.thighLbl.AutoSize = true;
+            this.thighLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.thighLbl.Location = new System.Drawing.Point(82, 609);
+            this.thighLbl.Name = "thighLbl";
+            this.thighLbl.Size = new System.Drawing.Size(149, 25);
+            this.thighLbl.TabIndex = 22;
+            this.thighLbl.Text = "Thigh (inches)";
+            // 
+            // waistTxtBox
+            // 
+            this.waistTxtBox.Location = new System.Drawing.Point(248, 468);
+            this.waistTxtBox.Name = "waistTxtBox";
+            this.waistTxtBox.Size = new System.Drawing.Size(133, 20);
+            this.waistTxtBox.TabIndex = 23;
+            // 
+            // stomachTxtBox
+            // 
+            this.stomachTxtBox.Location = new System.Drawing.Point(614, 469);
+            this.stomachTxtBox.Name = "stomachTxtBox";
+            this.stomachTxtBox.Size = new System.Drawing.Size(133, 20);
+            this.stomachTxtBox.TabIndex = 24;
+            // 
+            // bicepTxtBox
+            // 
+            this.bicepTxtBox.Location = new System.Drawing.Point(248, 548);
+            this.bicepTxtBox.Name = "bicepTxtBox";
+            this.bicepTxtBox.Size = new System.Drawing.Size(133, 20);
+            this.bicepTxtBox.TabIndex = 25;
+            // 
+            // thighTxtBox
+            // 
+            this.thighTxtBox.Location = new System.Drawing.Point(248, 615);
+            this.thighTxtBox.Name = "thighTxtBox";
+            this.thighTxtBox.Size = new System.Drawing.Size(133, 20);
+            this.thighTxtBox.TabIndex = 26;
+            // 
+            // chestTxtBox
+            // 
+            this.chestTxtBox.Location = new System.Drawing.Point(614, 547);
+            this.chestTxtBox.Name = "chestTxtBox";
+            this.chestTxtBox.Size = new System.Drawing.Size(133, 20);
+            this.chestTxtBox.TabIndex = 27;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 595);
+            this.ClientSize = new System.Drawing.Size(800, 793);
+            this.Controls.Add(this.chestTxtBox);
+            this.Controls.Add(this.thighTxtBox);
+            this.Controls.Add(this.bicepTxtBox);
+            this.Controls.Add(this.stomachTxtBox);
+            this.Controls.Add(this.waistTxtBox);
+            this.Controls.Add(this.thighLbl);
+            this.Controls.Add(this.chestLbl);
+            this.Controls.Add(this.bicepLbl);
+            this.Controls.Add(this.stomachLbl);
+            this.Controls.Add(this.waistLbl);
             this.Controls.Add(this.titleLbl);
             this.Controls.Add(this.logBtn);
             this.Controls.Add(this.thoughtTxt);
@@ -243,6 +350,7 @@
             this.Controls.Add(this.weightTxt);
             this.Name = "Form1";
             this.Text = "Weight Log - Zac Reese";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,6 +377,16 @@
         private System.Windows.Forms.TextBox thoughtTxt;
         private System.Windows.Forms.Button logBtn;
         private System.Windows.Forms.Label titleLbl;
+        private System.Windows.Forms.Label waistLbl;
+        private System.Windows.Forms.Label stomachLbl;
+        private System.Windows.Forms.Label bicepLbl;
+        private System.Windows.Forms.Label chestLbl;
+        private System.Windows.Forms.Label thighLbl;
+        private System.Windows.Forms.TextBox waistTxtBox;
+        private System.Windows.Forms.TextBox stomachTxtBox;
+        private System.Windows.Forms.TextBox bicepTxtBox;
+        private System.Windows.Forms.TextBox thighTxtBox;
+        private System.Windows.Forms.TextBox chestTxtBox;
     }
 }
 
